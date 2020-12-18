@@ -23,13 +23,23 @@ public void draw()
   for(int i = 0; i<shots.size(); i++){
     shots.get(i).move();
     shots.get(i).show();
+    for(int j = 0; j < asteroid.size(); j++){
+      if(dist((float)shots.get(i).getX(), (float)shots.get(i).getY(), (float)asteroid.get(j).getX(), (float)asteroid.get(j).getY())<25){
+          asteroid.remove(j);
+          shots.remove(i);
+          asteroid.add(new Asteroid());
+          break;
+        }
+    }
   }
   for(int i = 0; i<asteroid.size(); i++){
     asteroid.get(i).show();
     asteroid.get(i).move();
-    float d = dist((float)Pat.getX(), (float)Pat.getY(), (float)asteroid.get(i).getX(),  (float)asteroid.get(i).getY());
-    if(d<20){
+    float a = dist((float)Pat.getX(), (float)Pat.getY(), (float)asteroid.get(i).getX(),  (float)asteroid.get(i).getY());
+    if(a<20){
       asteroid.remove(i);
+      asteroid.add(new Asteroid());
+      break;
     }
   }
 }
